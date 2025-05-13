@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { TodoComponent } from './todo/todo.component';
+import { AppRoutingModule } from './app-routing.module';
+import { TodoService } from './todo/services/todo.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [
-    provideClientHydration(withEventReplay())
-  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers:[TodoService]
 })
-export class AppModule { }
+export class AppModule {}

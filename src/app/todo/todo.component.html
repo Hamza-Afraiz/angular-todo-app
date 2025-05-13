@@ -1,0 +1,21 @@
+<div class="todo-container">
+    <h2>Todo List</h2>
+  
+    <!-- Add New Todo -->
+    <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+      <input formControlName="task" placeholder="Enter a new task">
+      <button type="submit" [disabled]="todoForm.invalid">Add Task</button>
+    </form>
+  
+    <!-- Display Todos -->
+    <ul>
+      <li *ngFor="let todo of todos$ | async">
+        <span [class.completed]="todo.completed">{{ todo.task }}</span>
+        <button (click)="toggleCompletion(todo.id)">
+          {{ todo.completed ? 'Undo' : 'Complete' }}
+        </button>
+        <button (click)="deleteTodo(todo.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  
