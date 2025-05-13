@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TodoService } from './services/todo.service';
 
 @Component({
@@ -8,18 +13,14 @@ import { TodoService } from './services/todo.service';
   styleUrls: ['./todo.component.css'],
   standalone: false,
 })
-export class TodoComponent implements OnInit {
-  todoForm!: FormGroup;
-  todos$!: any;
-
+export class TodoComponent {
   constructor(private fb: FormBuilder, private todoService: TodoService) {}
+  todoForm: FormGroup = new FormGroup({
+    task: new FormControl('', [Validators.required]),
+  });
 
-  ngOnInit(): void {
-    this.todoForm = this.fb.group({
-      task: ['', Validators.required]
-    });
-
-    this.todos$ = this.todoService.todos$; // ✅ Moved here
+  getTodos() {
+    return this.todoService.getTodos();
   }
 
   addTodo(): void {
